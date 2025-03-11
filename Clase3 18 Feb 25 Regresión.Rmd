@@ -1,0 +1,149 @@
+---
+title: "Clase3 18 Feb 25 Regresion lineal"
+output: html_document
+date: "2025-02-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(MASS)
+library(ISLR)
+```
+
+
+```{r}
+library(datasets)
+```
+
+```{r}
+data()
+```
+
+```{r}
+data("Boston")
+```
+
+```{r}
+?Boston
+head(Boston, 5)
+str(Boston)
+summary(Boston)
+pairs(Boston)
+```
+
+```{r}
+attach(Boston)
+```
+
+```{r}
+plot(lstat,medv,main =  "medv vs.lstat")
+```
+##Ejemplo de regresión lineal simple 
+
+```{r}
+regression1<-lm(medv ~ lstat)
+summary(regression1)
+```
+
+```{r}
+RSS <- sum(residuals(regression1)^2)
+TSS <- sum((medv - mean(medv))^2)
+
+(1 - RSS/TSS) - summary(regression1)$r.squared
+```
+
+```{r}
+conf.interval <- predict(regression1, data.frame(lstat = Boston[, 13]), interval = "confidence")
+pred.interval <- predict(regression1, data.frame(lstat = Boston[, 13]), interval = "prediction")
+
+plot(lstat, medv, pch = 20, main = "medv vs. lstat", col = "red")
+abline(regression1, lwd = 2, col = "blue")
+matlines(lstat, conf.interval[,2:3], col = "black", lty = 3)
+matlines(lstat, pred.interval[,2:3], col = "green", lty = 3)
+```
+
+
+#Tarea
+
+##Modelo 1
+
+
+```{r}
+plot(medv,crim,main =  "medv vs. crim")
+```
+
+```{r}
+regression2<-lm(crim ~ medv)
+summary(regression2)
+```
+
+```{r}
+RSS <- sum(residuals(regression2)^2)
+TSS <- sum((medv - mean(medv))^2)
+
+(1 - RSS/TSS) - summary(regression2)$r.squared
+```
+
+```{r}
+conf.interval <- predict(regression2, data.frame(crim = Boston[, 13]), interval = "confidence")
+pred.interval <- predict(regression2, data.frame(crim = Boston[, 13]), interval = "prediction")
+
+plot(crim, medv, pch = 20, main = "medv vs. crim", col = "red")
+abline(regression2, lwd = 2, col = "blue")
+matlines(crim, conf.interval[,2:3], col = "black", lty = 3)
+matlines(crim, pred.interval[,2:3], col = "green", lty = 3)
+```
+
+##Modelo 2
+
+
+```{r}
+plot(age,rad,main =  "age vs.rad")
+```
+
+```{r}
+regression3<-lm(rad ~ age)
+summary(regression3)
+```
+
+```{r}
+RSS <- sum(residuals(regression3)^2)
+TSS <- sum((rad - mean(medv))^2)
+
+(1 - RSS/TSS) - summary(regression3)$r.squared
+```
+
+```{r}
+conf.interval <- predict(regression3, data.frame(age = Boston[, 13]), interval = "confidence")
+pred.interval <- predict(regression3, data.frame(age = Boston[, 13]), interval = "prediction")
+
+plot(age,rad, pch = 20, main = "rad vs. age", col = "red")
+abline(regression3, lwd = 2, col = "blue")
+matlines(crim, conf.interval[,2:3], col = "black", lty = 3)
+matlines(crim, pred.interval[,2:3], col = "green", lty = 3)
+```
+
+

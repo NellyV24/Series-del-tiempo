@@ -1,0 +1,144 @@
+---
+title: "Clase 11 feb 24 Introducion"
+output: html_document
+date: "2025-02-11"
+---
+
+```{r}
+2 + 2
+```
+
+```{r}
+library(quantmod)
+```
+
+```{r}
+getSymbols("GOOG", from= "2019-11-29")
+```
+
+```{r}
+getSymbols("AMZN", from= "2019-11-29")
+```
+
+```{r}
+getSymbols("TSLA", from= "2019-11-29")
+```
+
+```{r}
+tsla1<- (TSLA$TSLA.Open)
+tsla2<- (TSLA$TSLA.High)
+tsla3<- (TSLA$TSLA.Close)
+```
+
+```{r}
+amzn1<- (AMZN$AMZN.Open)
+amzn2<- (AMZN$AMZN.High)
+amzn3<- (AMZN$AMZN.Close)
+```
+
+```{r}
+goog1<- (GOOG$GOOG.Open)
+goog2<- (GOOG$GOOG.High)
+goog3<- (GOOG$GOOG.Close)
+```
+
+```{r}
+tsla1<-na.omit(tsla1)
+```
+
+```{r}
+plot(tsla1)
+plot(tsla2)
+plot(tsla3)
+```
+
+
+```{r}
+plot(amzn1)
+plot(amzn2)
+plot(amzn3)
+```
+
+```{r}
+plot(goog1)
+plot(goog2)
+plot(goog3)
+```
+
+```{r}
+tsla1_dailyreturns<- dailyReturn(tsla1)
+```
+
+```{r}
+tsla1_weeklyreturns<- weeklyReturn(tsla1)
+```
+
+```{r}
+tsla1_monthlyreturns<-monthlyReturn(tsla1)
+```
+
+```{r}
+amzn1_dailyreturns<-dailyReturn(amzn1)
+```
+
+```{r}
+amzn1_weeklyreturns<-weeklyReturn(amzn1)
+```
+
+```{r}
+amzn1_monthlyreturns<-monthlyReturn(amzn1)
+```
+
+```{r}
+goog1_dailyreturns<-dailyReturn(goog1)
+```
+
+```{r}
+goog1_weeklyreturns<-weeklyReturn(goog1)
+```
+
+```{r}
+goog1_monthlyreturns<-monthlyReturn(goog1)
+```
+
+```{r}
+plot(tsla1_dailyreturns)
+```
+
+```{r}
+plot(tsla1, main = "Precios open de TSLA desde 2019")
+```
+
+```{r}
+plot(tsla1_monthlyreturns, main = "Rendimientos Mensuales TSLA desde 2019")
+```
+
+```{r}
+barplot(tsla1_monthlyreturns, main= "Rendimientos mensuales de TSLA en 2019 en barras")
+```
+
+```{r}
+barplot(amzn1_weeklyreturns, main= "Rendimientos semanales de AMZN en 2019 en barras")
+```
+
+```{r}
+barplot(goog1_monthlyreturns, main= "Rendimientos mensuales de GOOG en 2019 en barras")
+```
+
+```{r}
+plt <- barplot(na.omit(tsla1_monthlyreturns), main = "Rendimientos Mensuales de Open TSLA desde 2019")
+text(x = plt, y = na.omit(tsla1_monthlyreturns) + .09, labels = as.character(round(na.omit(tsla1_monthlyreturns), 4)))
+```
+
+```{r}
+plt <- barplot(na.omit(amzn1_monthlyreturns), main = "Rendimientos mensuales de Open AMZN desde 2019")
+text(x = plt, y = na.omit(amzn1_monthlyreturns) + .09, labels = as.character(round(na.omit(amzn1_monthlyreturns), 4)))
+```
+
+```{r}
+plt <- barplot(na.omit(goog1_monthlyreturns), main = "Rendimientos Mensuales de Open GOOG desde 2019")
+text(x = plt, y = na.omit(goog1_monthlyreturns) + .09, labels = as.character(round(na.omit(goog1_monthlyreturns), 4)))
+```
+
+
+
